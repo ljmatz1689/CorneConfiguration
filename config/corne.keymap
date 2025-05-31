@@ -5,11 +5,28 @@
  */
 
 #include <behaviors.dtsi>
-#include <dt-bindings/zmk/backlight.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/pointing.h>
+#include <dt-bindings/zmk/rgb.h>
 
 / {
+    macros {
+        back: back {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(LEFT_ARROW)>;
+            label = "BACK";
+        };
+
+        CloseWindow: CloseWindow {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LA(F4)>;
+            label = "CLOSEWINDOW";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -64,10 +81,10 @@
         Mouse {
             display-name = "Layer 3";
             bindings = <
-&kp ESC           &none          &kp HOME          &kp UP_ARROW       &kp END             &kp LA(F4)       &kp PRINTSCREEN                         &kp N7     &kp N8     &kp N9  &kp PLUS      &tog 5
-&kp LEFT_SHIFT    &kp PAGE_UP    &kp LEFT_ARROW    &kp DOWN_ARROW     &kp RIGHT_ARROW     &kp K_BACK       &none                                   &kp N4     &kp N5     &kp N6  &kp ASTERISK  &none
-&kp LEFT_CONTROL  &kp PAGE_DOWN  &kp LC(C_AC_CUT)  &kp LC(C_AC_COPY)  &kp LC(C_AC_PASTE)  &kp C_AC_UNDO    &kp C_AC_DESKTOP_SHOW_ALL_APPLICATIONS  &kp N1     &kp N2     &kp N3  &kp SLASH     &kp DELETE
-                                                   &kp TAB            &to 0               &kp BACKSPACE    &kp SPACE                               &kp ENTER  &kp SPACE
+&kp ESC           &none          &kp HOME          &kp UP_ARROW       &kp END             &CloseWindow     &kp PRINTSCREEN                         &mkp LCLK       &mmv MOVE_UP    &mkp RCLK        &none           &tog 5
+&kp LEFT_SHIFT    &kp PAGE_UP    &kp LEFT_ARROW    &kp DOWN_ARROW     &kp RIGHT_ARROW     &back            &none                                   &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &none
+&kp LEFT_CONTROL  &kp PAGE_DOWN  &kp LC(C_AC_CUT)  &kp LC(C_AC_COPY)  &kp LC(C_AC_PASTE)  &kp C_AC_UNDO    &kp C_AC_DESKTOP_SHOW_ALL_APPLICATIONS  &msc SCRL_LEFT  &none           &msc SCRL_RIGHT  &msc SCRL_DOWN  &kp DELETE
+                                                   &kp TAB            &to 0               &kp BACKSPACE    &mkp LCLK                               &kp ENTER       &kp SPACE
             >;
         };
 
@@ -75,7 +92,7 @@
             display-name = "Layer 4";
             bindings = <
 &trans            &bt BT_SEL 0   &bt BT_SEL 1    &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4     &kp KP_CLEAR  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_PLUS      &kp KP_MINUS
-&bt BT_CLR        &bt BT_DISC 0  &bt BT_DISC 1   &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4    &none         &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MULTIPLY  &kp KP_EQUAL
+&none             &bt BT_DISC 0  &bt BT_DISC 1   &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4    &none         &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MULTIPLY  &kp KP_EQUAL
 &kp LEFT_CONTROL  &bt BT_CLR     &bt BT_CLR_ALL  &none          &kp HOME       &kp END          &kp KP_DOT    &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_DIVIDE    &kp DELETE
                                                  &kp TAB        &kp LEFT_ALT   &kp BACKSPACE    &kp SPACE     &kp ENTER        &kp KP_N0
             >;
@@ -84,10 +101,10 @@
         Light {
             display-name = "Layer 5";
             bindings = <
-&none       &none          &none          &none          &none          &none            &bl BL_ON  &none            &none            &none            &none            &to 3
-&bt BT_CLR  &bt BT_DISC 0  &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &bt BT_DISC 4    &none      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MULTIPLY  &kp KP_EQUAL
-&none       &none          &none          &none          &none          &none            &none      &none            &none            &none            &kp KP_DIVIDE    &kp DELETE
-                                          &kp TAB        &kp LEFT_ALT   &kp BACKSPACE    &kp SPACE  &kp ENTER        &kp KP_N0
+&none                             &none                            &none                            &none                             &none                             &none                               &rgb_ug RGB_TOG                   &none                             &none                            &none                           &none            &to 3
+&rgb_ug RGB_COLOR_HSB(355,94,50)  &rgb_ug RGB_COLOR_HSB(22,97,49)  &rgb_ug RGB_COLOR_HSB(58,91,50)  &rgb_ug RGB_COLOR_HSB(118,95,49)  &rgb_ug RGB_COLOR_HSB(186,93,50)  &rgb_ug RGB_COLOR_HSB(231,94,47)    &rgb_ug RGB_COLOR_HSB(267,94,48)  &rgb_ug RGB_COLOR_HSB(305,97,49)  &rgb_ug RGB_COLOR_HSB(40,30,96)  &rgb_ug RGB_COLOR_HSB(245,0,1)  &rgb_ug RGB_HUI  &rgb_ug RGB_SAI
+&none                             &none                            &none                            &none                             &none                             &none                               &none                             &none                             &none                            &none                           &rgb_ug RGB_HUD  &rgb_ug RGB_SAD
+                                                                                                    &rgb_ug RGB_SPI                   &rgb_ug RGB_BRI                   &rgb_ug RGB_EFF                     &rgb_ug RGB_EFR                   &rgb_ug RGB_BRD                   &rgb_ug RGB_SPD
             >;
         };
     };
