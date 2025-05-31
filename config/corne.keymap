@@ -25,6 +25,34 @@
             bindings = <&kp LA(F4)>;
             label = "CLOSEWINDOW";
         };
+
+        cut: cut {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(X)>;
+            label = "CUT";
+        };
+
+        copy: copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C)>;
+            label = "COPY";
+        };
+
+        paste: paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V)>;
+            label = "PASTE";
+        };
+
+        undo: undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Z)>;
+            label = "UNDO";
+        };
     };
 
     keymap {
@@ -71,7 +99,7 @@
 
             display-name = "Layer 2";
             bindings = <
-&kp TAB           &mt F1 Q  &mt F2 W  &mt F3 E  &mt F4 R      &mt F5 T            &mt F6 Y   &mt F7 U  &mt F8 I   &mt F9 O  &mt F10 P  &kp F11
+&kp ESC           &mt F1 Q  &mt F2 W  &mt F3 E  &mt F4 R      &mt F5 T            &mt F6 Y   &mt F7 U  &mt F8 I   &mt F9 O  &mt F10 P  &kp F11
 &kp LEFT_SHIFT    &trans    &trans    &trans    &trans        &trans              &trans     &trans    &trans     &trans    &trans     &kp F12
 &kp LEFT_CONTROL  &trans    &trans    &trans    &trans        &trans              &trans     &trans    &trans     &trans    &trans     &kp DELETE
                                       &kp TAB   &kp LEFT_ALT  &kp LEFT_COMMAND    &kp SPACE  &trans    &kp ENTER
@@ -81,10 +109,10 @@
         Mouse {
             display-name = "Layer 3";
             bindings = <
-&kp ESC           &none          &kp HOME          &kp UP_ARROW       &kp END             &CloseWindow     &kp PRINTSCREEN                         &mkp LCLK       &mmv MOVE_UP    &mkp RCLK        &none           &tog 5
-&kp LEFT_SHIFT    &kp PAGE_UP    &kp LEFT_ARROW    &kp DOWN_ARROW     &kp RIGHT_ARROW     &back            &none                                   &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &none
-&kp LEFT_CONTROL  &kp PAGE_DOWN  &kp LC(C_AC_CUT)  &kp LC(C_AC_COPY)  &kp LC(C_AC_PASTE)  &kp C_AC_UNDO    &kp C_AC_DESKTOP_SHOW_ALL_APPLICATIONS  &msc SCRL_LEFT  &none           &msc SCRL_RIGHT  &msc SCRL_DOWN  &kp DELETE
-                                                   &kp TAB            &to 0               &kp BACKSPACE    &mkp LCLK                               &kp ENTER       &kp SPACE
+&lt 4 ESC         &none          &kp HOME        &kp UP_ARROW    &kp END          &CloseWindow     &kp PRINTSCREEN                         &mkp LCLK       &mmv MOVE_UP    &mkp RCLK        &none           &tog 5
+&kp LEFT_SHIFT    &kp PAGE_UP    &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &back            &none                                   &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &msc SCRL_UP    &none
+&kp LEFT_CONTROL  &kp PAGE_DOWN  &cut            &copy           &paste           &undo            &kp C_AC_DESKTOP_SHOW_ALL_APPLICATIONS  &msc SCRL_LEFT  &none           &msc SCRL_RIGHT  &msc SCRL_DOWN  &kp DELETE
+                                                 &kp TAB         &to 0            &kp BACKSPACE    &mkp LCLK                               &kp ENTER       &kp SPACE
             >;
         };
 
